@@ -9,21 +9,24 @@ import {
 } from "./utils/constants";
 import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
+import { FavoritesContextProvider } from "./store/favorites-context";
 
 function App() {
   return (
-    <Router>
-      <div data-test="app">
-        <MainNavigation />
-        <Layout>
-          <Switch>
-            <Route exact path={ALL_MEETUP_PAGE} component={AllMeetupsPage} />
-            <Route path={NEW_MEETUP_PAGE} component={NewMeetupsPage} />
-            <Route path={FAVORITES_PAGE} component={FavoritesPage} />
-          </Switch>
-        </Layout>
-      </div>
-    </Router>
+    <FavoritesContextProvider>
+      <Router>
+        <div data-test="app">
+          <MainNavigation />
+          <Layout>
+            <Switch>
+              <Route exact path={ALL_MEETUP_PAGE} component={AllMeetupsPage} />
+              <Route path={NEW_MEETUP_PAGE} component={NewMeetupsPage} />
+              <Route path={FAVORITES_PAGE} component={FavoritesPage} />
+            </Switch>
+          </Layout>
+        </div>
+      </Router>
+    </FavoritesContextProvider>
   );
 }
 
