@@ -3,15 +3,18 @@ import classes from "./NewMeetupForm.module.css";
 import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { ALL_MEETUP_PAGE } from "../../utils/constants";
+import { useContext } from "react";
+import MeetupsContext from "../../store/meetups-context";
 
 export default function NewMeetupForm() {
+  const meetupsCtx = useContext(MeetupsContext);
+  
+  const history = useHistory();
+
   const titleRef = useRef();
   const imageRef = useRef();
   const addressRef = useRef();
   const descriptionRef = useRef();
-
-  // const [isSubmitting, setIsSubmitting] = useState(false);
-  const history = useHistory();
 
   function submitHandler(event) {
     event.preventDefault();
@@ -37,16 +40,15 @@ export default function NewMeetupForm() {
       description: enteredDescription,
     };
 
-    // setIsSubmitting(true);
     try {
       const stored = JSON.parse(localStorage.getItem("meetups") || "[]");
       stored.push(newMeetup); // append to the end
       localStorage.setItem("meetups", JSON.stringify(stored));
+      meetupsCtx.addMeetup(newMeetup);
+      history.push(ALL_MEETUP_PAGE);
     } catch (err) {
       console.error("Failed to save meetup", err);
     }
-    // setIsSubmitting(false);
-    history.push(ALL_MEETUP_PAGE);
   }
 
   return (
