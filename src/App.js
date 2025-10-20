@@ -17,7 +17,7 @@ function App() {
     <FavoritesContextProvider>
       <MeetupsContextProvider>
       <Router>
-        <div data-test="app">
+        <div data-test="app" style={{marginTop:'7rem'}}>
           <MainNavigation />
           <Layout>
             <Switch>
