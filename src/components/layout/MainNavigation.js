@@ -50,7 +50,7 @@ export default function MainNavigation() {
           <li>
             <NavLink to={FAVORITES_PAGE} activeClassName={classes.active}>
               My Favorites
-              <span className={classes.badge}>
+              <span className={classes.favoritesBadge}>
                 {favoritesCtx.totalFavorites}
               </span>
             </NavLink>
