@@ -9,8 +9,8 @@ import {
 } from "./utils/constants";
 import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
-import { FavoritesContextProvider } from "./store/favorites-context";
-import { MeetupsContextProvider } from "./store/meetups-context";
+import { FavoritesContextProvider } from "./store/FavoritesContext";
+import { MeetupsContextProvider } from "./store/MeetupsContext";
 
 function App() {
   return (

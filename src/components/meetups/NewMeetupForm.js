@@ -4,11 +4,10 @@ import { useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { ALL_MEETUP_PAGE } from "../../utils/constants";
 import { useContext } from "react";
-import MeetupsContext from "../../store/meetups-context";
+import MeetupsContext from "../../store/MeetupsContext";
 
 export default function NewMeetupForm() {
   const meetupsCtx = useContext(MeetupsContext);
-  
   const history = useHistory();
 
   const titleRef = useRef();
@@ -31,7 +30,6 @@ export default function NewMeetupForm() {
     ) {
       return;
     }
-
     const newMeetup = {
       id: Date.now().toString(),
       title: enteredTitle,
@@ -42,7 +40,7 @@ export default function NewMeetupForm() {
 
     try {
       const stored = JSON.parse(localStorage.getItem("meetups") || "[]");
-      stored.push(newMeetup); // append to the end
+      stored.unshift(newMeetup);
       localStorage.setItem("meetups", JSON.stringify(stored));
       meetupsCtx.addMeetup(newMeetup);
       history.push(ALL_MEETUP_PAGE);

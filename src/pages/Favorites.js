@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import MeetupItem from "../components/meetups/MeetupItem";
 import classes from "./../components/meetups/MeetupList.module.css";
-import FavoritesContext from "../store/favorites-context";
+import FavoritesContext from "../store/FavoritesContext";
 
 export default function FavoritesPage() {
   const { totalFavorites, favorites } = useContext(FavoritesContext);
