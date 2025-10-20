@@ -6,8 +6,11 @@ import {
 } from "./../../utils/constants";
 
 import classes from "./MainNavigation.module.css";
+import { useContext } from "react";
+import FavoritesContext from "../../store/favorites-context";
 
 export default function MainNavigation() {
+  const favoritesCtx = useContext(FavoritesContext);
   return (
     <header className={classes.header} data-test="navigation-header">
       <div className={classes.logo}>React Meetups</div>
@@ -31,7 +34,7 @@ export default function MainNavigation() {
           <li>
             <NavLink to={FAVORITES_PAGE} activeClassName={classes.active}>
               My Favorites
-              <span className={classes.badge}>{0}</span>
+              <span className={classes.badge}>{favoritesCtx.totalFavorites}</span>
             </NavLink>
           </li>
         </ul>
