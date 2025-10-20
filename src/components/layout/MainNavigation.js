@@ -4,15 +4,31 @@ import {
   FAVORITES_PAGE,
   NEW_MEETUP_PAGE,
 } from "./../../utils/constants";
-
+import { useContext, useEffect, useRef, useState } from "react";
 import classes from "./MainNavigation.module.css";
-import { useContext } from "react";
 import FavoritesContext from "../../store/favorites-context";
 
 export default function MainNavigation() {
   const favoritesCtx = useContext(FavoritesContext);
+  const [visible, setVisible] = useState(true);
+  const prevScroll = useRef(
+    typeof window !== "undefined" ? window.pageYOffset : 0
+  );
+
+  useEffect(() => {
+    function onScroll() {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
+      setVisible(prevScroll.current > current);
+      prevScroll.current = current;
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+  }, []);
+
   return (
-    <header className={classes.header} data-test="navigation-header">
+    <header
+      className={`${classes.header} ${!visible ? classes.hidden : ""}`}
+      data-test="navigation-header"
+    >
       <div className={classes.logo}>React Meetups</div>
       <nav>
         <ul>
@@ -34,7 +50,9 @@ export default function MainNavigation() {
           <li>
             <NavLink to={FAVORITES_PAGE} activeClassName={classes.active}>
               My Favorites
-              <span className={classes.badge}>{favoritesCtx.totalFavorites}</span>
+              <span className={classes.badge}>
+                {favoritesCtx.totalFavorites}
+              </span>
             </NavLink>
           </li>
         </ul>
