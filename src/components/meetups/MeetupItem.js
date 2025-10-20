@@ -1,14 +1,7 @@
-import { useFetch } from "./../../util-hooks/useFetch";
 import classes from "./MeetupItem.module.css";
 import Card from "../ui/Card";
 
-export default function MeetupItem() {
-  const { data } = useFetch({
-    url: "/data.json",
-  });
-
-  if (!data) return <p>Loading...</p>;
-  let [item] = data;
+export default function MeetupItem({ item }) {
 
   return (
     <li className={classes.item} data-test='meet-up-item'>
