@@ -10,10 +10,12 @@ import {
 import MainNavigation from "./components/layout/MainNavigation";
 import Layout from "./components/layout/Layout";
 import { FavoritesContextProvider } from "./store/favorites-context";
+import { MeetupsContextProvider } from "./store/meetups-context";
 
 function App() {
   return (
     <FavoritesContextProvider>
+      <MeetupsContextProvider>
       <Router>
         <div data-test="app">
           <MainNavigation />
@@ -26,6 +28,7 @@ function App() {
           </Layout>
         </div>
       </Router>
+      </MeetupsContextProvider>
     </FavoritesContextProvider>
   );
 }
